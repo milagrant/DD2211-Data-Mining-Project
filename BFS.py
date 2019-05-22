@@ -26,6 +26,22 @@ def init():
         second_col = list(zip(*reader))[1]
         to = list(map(int, second_col))
         
+def gen_random_sample():
+    init()
+    indices = random.sample(range(1, FULL), SAMPLE)
+    visited = list()
+    edges = list()
+    for i in range(1, FULL):
+        if i in indices:
+            node_from = fr[i]
+            node_to = to[i]
+            edges.append([node_from, node_to])
+            if not node_from in visited:
+                visited.append(node_from)
+            if not node_to in visited:
+                visited.append(node_to)
+    return edges, visited
+                  
 def bfs(root):
      Q = queue.Queue()
      Q.put(root)
@@ -53,5 +69,5 @@ def bfs(root):
 def gen_bfs_sample():
     init()
     root = random.randint(1,FULL)
-    edges, visited = bfs(root)
-    return edges, visited
+    return bfs(root)
+
