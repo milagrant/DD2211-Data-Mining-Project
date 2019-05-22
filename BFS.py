@@ -5,11 +5,11 @@ Created on Wed May 22 10:32:39 2019
 @author: Mila
 """
 import csv
-import random
 import queue
+import random
 
 FULL = 1134890
-SAMPLE = FULL *0.01
+SAMPLE = FULL*0.01
 fr = list()
 to = list()
     
@@ -48,9 +48,10 @@ def bfs(root):
              visited.append(n)
              edges.append([current, n])
     
-     return edges
-    
-init()
-root = random.randint(1,FULL)
-edges = bfs(root)
-print(edges)
+     return edges, visited
+ 
+def gen_bfs_sample():
+    init()
+    root = random.randint(1,FULL)
+    edges, visited = bfs(root)
+    return edges, visited
