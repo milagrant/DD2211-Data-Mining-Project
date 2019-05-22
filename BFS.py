@@ -39,6 +39,8 @@ def bfs(root):
          for i in range(FULL):
              if fr[i] == current:
                  neighbours.append(to[i])
+             if to[i] == current:
+                 neighbours.append(fr[i])
          for n in neighbours:
              if n in visited:
                  continue
@@ -50,5 +52,5 @@ def bfs(root):
     
 init()
 root = random.randint(1,FULL)
-edges = bfs(1)
+edges = bfs(root)
 print(edges)
