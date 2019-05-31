@@ -36,27 +36,23 @@ def get_non_pairs(visited, pairs):
     return non_pairs
 
 """
-Penalizes false positives and false negatives
 Rewards true positives and true negatives
-
-Interpretation:
-A score close to 0 is very bad
-A score over 1 is good, the greater the better
+Returns accuracy and precision
 
 :param pairs: list of pairs of sampled nodes which ended up in the same community
 :param non-pairs: list of all possible pairs in the sample that did not end up in the same community
 """
 def score(pairs, non_pairs):
-    score = 1.0
+    TP = 0.0
+    TN = 0.0
     for pair in pairs:
-        if(check_pair(pair)): # TP
-            score *= 1.1
-        else:
-            score *= 0.9 # FP
+        if(check_pair(pair)):
+            TP += 1  
     for pair in non_pairs:
-        if(check_pair(pair)): # FN
-            score *= 0.9
-        else:
-            score *= 1.1 # TN
-    return score
+        if not (check_pair(pair)): 
+            TN += 1
+    accuracy = (TP+TN)/(len(pairs)+len(non_pairs)) 
+    precision = TP/(len(pairs))
+            
+    return accuracy, precision
         
